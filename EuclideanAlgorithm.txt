@@ -1,0 +1,110 @@
+
+    ################################################
+    #          Programming Assignment Three        #
+    ################################################
+    #  Author Bridgette Stranko		           #
+    ################################################
+    #  This MIPS assembly language program finds   #
+    #  the greatest common denominator of two      #
+    #  numbers using the Euclidean Algorithm       #
+    ################################################
+
+              .data
+    Smaller:       .word    3648
+    Larger:        .word    7764 
+    HeaderText:    .asciiz  "Larger\t\tSmaller\t\tRemainder"          
+    DblTab:	   .asciiz  "\t\t"
+    GCDMsg:        .asciiz  "The greatest common divisor is " 
+    NewLine:	   .asciiz  "\n"
+    
+             .text   
+    
+    #
+    #  Register usage:
+    #      $t0: Numerator
+    #      $t1: Denominator
+    #      $t2: Remainder
+    #	   
+       
+    #
+    #  Initialize the registers.
+    #
+              lw        $t0, Smaller
+              lw        $t1, Larger
+              li        $t2, 1    
+ 
+    #
+    #  Print the column Header and 
+    #  the numbers in register $t0 & $t1 
+    #  then compute the 1st set of division
+    #  
+    
+              li       $v0, 4
+	      la       $a0, HeaderText
+    	      syscall
+
+    	      li       $v0, 4
+    	      la       $a0, NewLine 
+    	      syscall      
+    	  
+Division:     beqz     $t2, Done   
+              div      $t1, $t0
+              mfhi     $t2
+
+    	      li       $v0, 1
+    	      move     $a0, $t1
+    	      syscall
+
+     	      li       $v0, 4
+    	      la       $a0, DblTab 
+    	      syscall 
+    	          	          	      
+    	      li       $v0, 1
+    	      move     $a0, $t0
+    	      syscall
+    	      
+    	      li       $v0, 4
+    	      la       $a0, DblTab 
+    	      syscall
+
+    	      li       $v0, 1
+    	      move     $a0, $t2
+    	      syscall
+    	      
+    	      li       $v0, 4
+    	      la       $a0, NewLine 
+    	      syscall
+    	          	      
+    	      move     $t1, $t0
+              move     $t0, $t2    
+    	      
+    	      j Division
+
+Done:         li       $v0, 4
+    	      la       $a0, NewLine 
+    	      syscall  
+    	      
+    	      li       $v0, 4
+    	      la       $a0, GCDMsg 
+    	      syscall
+    	      
+    	      li       $v0, 1
+    	      move     $a0, $t1
+    	      syscall
+    	      
+              li       $v0, 10
+              syscall
+              
+###################################################
+# Output: 					  #		
+# Larger	Smaller		Remainder         #
+# 7764		3648		468               #
+# 3648		468		372               #
+# 468		372		96                #
+# 372		96		84                #
+# 96		84		12                #
+# 84		12		0                 #
+#                                                 #
+# The greatest common divisor is 12	          #
+#						  #
+###################################################
