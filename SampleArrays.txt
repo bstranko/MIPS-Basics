@@ -1,0 +1,92 @@
+
+    ################################################
+    #  Author Bridgette Stranko		           #
+    ################################################
+    #  This MIPS assembly language program sorts   #
+    #  the numbers of an array in ascending order  #
+    ################################################
+
+
+              .data
+    Nums:     .word     6, 2, 8, 3, 6, 9, 3, 5
+    ATimes:   .word     7
+    PTimes:   .word     8
+    Temp:     .word     0
+    EndLine:  .asciiz   "\n"
+    Spaces:   .asciiz   ",  "
+              .text
+    #
+    #  Register usage:
+    #    $t0    Pointer into array.
+    #    $t1    Iteration counter for array.
+    #    $t2    The current term.
+    #    $t3    The next term
+    #    $t4    The number of iterations for sorting.
+    #    $t5    Iteration counter for printing.
+    #    $t6    The number of iterations for printing.
+    #    $t7    Swap (1 for true, 0 for false)
+    #
+    #  Initialize registers.
+
+              la        $t0, Nums
+              li        $t1, 0
+              lw        $t4, ATimes
+              li        $t5, 0
+              lw        $t6, PTimes
+              li        $t7, 0
+              
+SetValues:    bge       $t1, $t4, CheckSwap
+	      lw        $t2, 0($t0)
+	      lw        $t3, 4($t0)
+              addi      $t0, $t0, 4
+              addi      $t1, $t1, 1
+
+Swap:         bge       $t3, $t2, SetValues
+              subi      $t0, $t0, 4
+              sw        $t3, 0($t0)
+              sw        $t2, 4($t0)
+              addi      $t0, $t0, 4 
+              li        $t7, 1         
+              j         SetValues
+
+CheckSwap:    beqz      $t7, ResetNums
+	      li        $t7, 0
+	      la        $t0, Nums
+	      li        $t1, 0
+	      j SetValues
+	      
+ResetNums:    la       $t0, Nums
+      
+   
+Print:        bge       $t5, $t6, Exit
+              lw        $t2, 0($t0)
+              
+              li        $v0, 1
+              move      $a0, $t2
+              syscall
+
+              li        $v0, 4
+              la        $a0, EndLine
+              syscall
+              
+              addi      $t0, $t0, 4
+              addi      $t5, $t5, 1
+              j         Print
+              
+Exit:         li        $v0, 10
+              syscall
+
+
+   ##########################################
+   #   Output:                              #
+   #	2                                   #
+   #	3                                   #
+   #	3                                   #
+   #	5                                   #
+   #	6                                   #
+   #	6                                   #
+   #	8                                   #
+   #	9				    #
+   #					    #
+   #	-- program is finished running --   #
+   #########################################

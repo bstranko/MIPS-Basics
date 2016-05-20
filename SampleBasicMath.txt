@@ -1,0 +1,124 @@
+
+    ################################################
+    #          Programming Assignment One          #
+    ################################################
+    #  Author Bridgette Stranko		           #
+    ################################################
+    #  This MIPS assembly language program takes   #
+    #  two values A & B and computes some very     #
+    #  basic arithmetic.                           #
+    ################################################
+
+              .data
+
+    A:  	   .word     23
+    B:		   .word     7
+    NegA:	   .word     0
+    Sum:	   .word     0
+    ALessB:	   .word     0
+    BLessA:	   .word     0
+    Spaces:	   .asciiz  "   "
+
+  
+            .text
+              
+    #
+    # Store A & B into registers 0 & 1 respectively
+    #
+       
+              lw        $t0, A
+              lw        $t1, B
+
+               
+    #
+    # Calculate NegA.  
+    #
+              
+              sub       $t2, $zero, $t0
+              sw	$t2, NegA
+    
+    #
+    # Calculate Sum of A and B.  
+    #
+                  
+              add       $t2, $t0, $t1
+              sw	$t2, Sum              
+
+    #
+    # Calculate Difference of A minus B
+    #
+                  
+              sub       $t2, $t0, $t1
+              sw	$t2, ALessB   
+       
+    #
+    # Calculate Difference of B minus A
+    #
+                  
+              sub       $t2, $t1, $t0
+              sw	$t2, BLessA
+
+    #
+    # Print the values
+    #                
+             
+              li        $v0, 1
+              lw        $a0, A
+              syscall
+              
+              li        $v0, 4
+              la        $a0, Spaces
+              syscall
+
+              li        $v0, 1
+              lw        $a0, B
+              syscall
+              
+              li        $v0, 4
+              la        $a0, Spaces
+              syscall
+
+              
+              li        $v0, 1
+              lw        $a0, NegA
+              syscall
+              
+              li        $v0, 4
+              la        $a0, Spaces
+              syscall      
+                          
+              
+              li        $v0, 1
+              lw        $a0, Sum
+              syscall  
+              
+              li        $v0, 4
+              la        $a0, Spaces
+              syscall      
+                         
+              
+              li        $v0, 1
+              lw        $a0, ALessB
+              syscall                                                                              
+              
+              li        $v0, 4
+              la        $a0, Spaces
+              syscall      
+              
+              li        $v0, 1
+              la        $a0, BLessA
+              syscall                                                                                                                                                                                                                                                                       
+
+    #
+    #  Return to the operating system.
+    #
+              li        $v0, 10
+              syscall
+              
+    #############################################
+    #					      	#			
+    # Output: 			         	#
+    #                                           #             
+    # 23   7   -23   30   16   -16            	#
+    #############################################
+                                                                                                                                                                                                                                                                                                                                                                                                                                      
