@@ -1,8 +1,6 @@
 
     ################################################
-    #          Programming Assignment Two          #
-    ################################################
-    #  Author Bridgette Stranko		           #
+    #  Author Bridgette Stranko                    #
     ################################################
     #  This MIPS assembly language program prints  #
     #  the first ten numbers of the Fibonacci      #

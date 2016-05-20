@@ -1,8 +1,6 @@
 
     ################################################
-    #          Programming Assignment One          #
-    ################################################
-    #  Author Bridgette Stranko		           #
+    #  Author Bridgette Stranko                    #
     ################################################
     #  This MIPS assembly language program takes   #
     #  two values A & B and computes some very     #
@@ -116,9 +114,9 @@
               syscall
               
     #############################################
-    #					      	#			
+    #                                           #
     # Output: 			         	#
-    #                                           #             
+    #                                           #
     # 23   7   -23   30   16   -16            	#
     #############################################
                                                                                                                                                                                                                                                                                                                                                                                                                                       

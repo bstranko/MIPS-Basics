@@ -1,6 +1,6 @@
 
     ################################################
-    #  Author Bridgette Stranko		           #
+    #  Author Bridgette Stranko                    #
     ################################################
     #  This MIPS assembly language program sorts   #
     #  the numbers of an array in ascending order  #
@@ -78,7 +78,7 @@ Exit:         li        $v0, 10
 
 
    ##########################################
-   #   Output:                              #
+   #   Output:                             #
    #	2                                   #
    #	3                                   #
    #	3                                   #
